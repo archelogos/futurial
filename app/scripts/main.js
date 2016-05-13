@@ -19,28 +19,28 @@
         event.preventDefault();
     });*/
 
-    // Headroom js
-    // grab an element
-    var myElement = document.querySelector('#headroom-nav');
-    // construct an instance of Headroom, passing the element
-    var headroom = new Headroom(myElement, {
-      scroller : document.querySelector('.mdl-layout__content')
-    });
-    // initialise
-    headroom.init();
-
-    // Headroom js
-    // grab an element
-    var myElementMobile = document.querySelector('.mdl-layout__drawer-button');
-    // construct an instance of Headroom, passing the element
-    var headroomMobile = new Headroom(myElementMobile, {
-      scroller : document.querySelector('.mdl-layout__content'),
-        classes : {
-          pinned : 'headroom--pinned-mobile'
-      }
-    });
-    // initialise
-    headroomMobile.init();
+    // // Headroom js
+    // // grab an element
+    // var myElement = document.querySelector('#headroom-nav');
+    // // construct an instance of Headroom, passing the element
+    // var headroom = new Headroom(myElement, {
+    //   scroller : document.querySelector('.mdl-layout__content')
+    // });
+    // // initialise
+    // headroom.init();
+    //
+    // // Headroom js
+    // // grab an element
+    // var myElementMobile = document.querySelector('.mdl-layout__drawer-button');
+    // // construct an instance of Headroom, passing the element
+    // var headroomMobile = new Headroom(myElementMobile, {
+    //   scroller : document.querySelector('.mdl-layout__content'),
+    //     classes : {
+    //       pinned : 'headroom--pinned-mobile'
+    //   }
+    // });
+    // // initialise
+    // headroomMobile.init();
 
     //SlickJS
     $('.presentation').slick({

@@ -19,7 +19,8 @@ module.exports = function (grunt) {
   // Configurable paths
   var config = {
     app: 'app',
-    dist: 'dist'
+    dist: 'dist',
+    distProd: 'dist/prod/futurial/assets'
   };
 
   // Define the configuration for all the tasks
@@ -115,6 +116,16 @@ module.exports = function (grunt) {
             '.tmp',
             '<%= config.dist %>/*',
             '!<%= config.dist %>/.git*'
+          ]
+        }]
+      },
+      distProd: {
+        files: [{
+          dot: true,
+          src: [
+            '.tmp',
+            '<%= config.distProd %>/*',
+            '!<%= config.distProd %>/.git*'
           ]
         }]
       },
@@ -312,6 +323,30 @@ module.exports = function (grunt) {
           dest: '<%= config.dist %>'
         }]
       },
+      distProd: {
+        files: [{
+          expand: true,
+          dot: true,
+          cwd: '<%= config.app %>',
+          dest: '<%= config.distProd %>',
+          src: [
+            '*.{ico,png,txt}',
+            'images/{,*/}*.webp',
+            'videos/{,*/}*',
+            '{,*/}*.html',
+            'styles/fonts/{,*/}*.*'
+          ]
+        }, {
+          src: 'node_modules/apache-server-configs/distProd/.htaccess',
+          dest: '<%= config.distProd %>/.htaccess'
+        }, {
+          expand: true,
+          dot: true,
+          cwd: 'bower_components/bootstrap/distProd',
+          src: 'fonts/*',
+          dest: '<%= config.distProd %>'
+        }]
+      },
       styles: {
         expand: true,
         dot: true,
@@ -330,6 +365,11 @@ module.exports = function (grunt) {
         'copy:styles'
       ],
       dist: [
+        'copy:styles',
+        'imagemin',
+        'svgmin'
+      ],
+      distProd: [
         'copy:styles',
         'imagemin',
         'svgmin'
@@ -386,6 +426,21 @@ module.exports = function (grunt) {
     'cssmin',
     'uglify',
     'copy:dist',
+    'rev',
+    'usemin',
+    'htmlmin'
+  ]);
+
+  grunt.registerTask('buildProd', [
+    'clean:distProd',
+    'wiredep',
+    'useminPrepare',
+    'concurrent:distProd',
+    'autoprefixer',
+    'concat',
+    'cssmin',
+    'uglify',
+    'copy:distProd',
     'rev',
     'usemin',
     'htmlmin'
